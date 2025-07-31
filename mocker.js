@@ -1,4 +1,4 @@
-export default class Mock {
+export default class Mocker {
   add(api_name, api_key) {
     localStorage.setItem(api_name, api_key);
   }
