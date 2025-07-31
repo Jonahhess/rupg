@@ -2,7 +2,7 @@ import model from "./model.js";
 import getData from "./getData.js";
 import parse from "./parser.js";
 
-export default async function init() {
+export async function init() {
   const [users, kanye, pokedex, baconIpsum] = await Promise.all([
     getData("https://randomuser.me/api/?results=7"),
     getData("https://api.kanye.rest"),
