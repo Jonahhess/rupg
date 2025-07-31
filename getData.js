@@ -1,6 +1,6 @@
 async function getData(url) {
-  const cached = localStorage.getItem(url);
-  if (cached) return JSON.parse(cached);
+  //const cached = localStorage.getItem(url);
+  //if (cached) return JSON.parse(cached);
 
   const response = await fetch(url);
   if (!response.ok) throw new Error("bad path");
