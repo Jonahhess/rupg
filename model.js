@@ -1,2 +1,2 @@
-const user = new Map();
+const user = {};
 export default user;

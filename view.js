@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function render(model) {
-  const currentUser = model.get("currentUser");
-  const kanyeQuote = model.get("kanyeQuote");
-  const pokemon = model.get("pokemon");
-  const bacon = model.get("bacon");
-  const friends = model.get("friends");
+  const currentUser = model["currentUser"];
+  const kanyeQuote = model["kanyeQuote"];
+  const pokemon = model["pokemon"];
+  const bacon = model["bacon"];
+  const friends = model["friends"];
 
   const userContainer = document.createElement("div");
   userContainer.setAttribute("id", "user-container");

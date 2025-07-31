@@ -27,7 +27,7 @@ export async function init() {
 
 export function update(entries) {
   for (const [key, value] of entries) {
-    model.set(key, value);
+    model[key] = value;
   }
   return model;
 }
