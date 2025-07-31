@@ -1,6 +1,6 @@
 import model from "./model.js";
 import getData from "./getData.js";
-import parse from "./parser.js";
+import * as parser from "./parser.js";
 
 export async function init() {
   const [users, kanye, pokedex, baconIpsum] = await Promise.all([
@@ -11,7 +11,6 @@ export async function init() {
   ]);
 
   // prepare data for page
-  const parser = parse();
   const [currentUser, ...friends] = parser.parseUsers(users);
   const kanyeQuote = `'${kanye.quote}' - Kanye West`;
   const pokemon = parser.parsePokemon(pokedex);
