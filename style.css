@@ -36,3 +36,7 @@ li {
 #friends-list-title {
   text-align: center;
 }
+
+#favorite-pokemon {
+  text-transform: capitalize;
+}
