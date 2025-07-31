@@ -1,18 +1,15 @@
 const parser = () => {
   function parseUsers(users) {
-    const [first, ...others] = users.results;
+    const [me, ...friends] = users.results;
     const currentUser = {
-      fname: first.name.first,
-      lname: first.name.last,
-      city: first.location.city,
-      state: first.location.state,
-      picture: first.picture,
+      name: `${me.name.first} ${me.name.last}`,
+      city: me.location.city,
+      state: me.location.state,
+      picture: me.picture,
     };
     return [
       currentUser,
-      ...others.map((u) => {
-        return { fname: u.name.first, lname: u.name.last };
-      }),
+      ...friends.map((u) => `${u.name.first} ${u.name.last}`),
     ];
   }
 
