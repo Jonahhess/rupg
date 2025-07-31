@@ -1,5 +1,13 @@
 import * as update from "./update.js";
 
+document.addEventListener("DOMContentLoaded", () => {
+  const generateUserButton = document.getElementById("generate-user");
+  generateUserButton.addEventListener("click", async () => {
+    const model = await update.init();
+    render(model);
+  });
+});
+
 function render(model) {
   const currentUser = model.get("currentUser");
   const kanyeQuote = model.get("kanyeQuote");
@@ -109,11 +117,3 @@ function render(model) {
   target.appendChild(userContainer);
   target.appendChild(friendsListContainer);
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const generateUserButton = document.getElementById("generate-user");
-  generateUserButton.addEventListener("click", async () => {
-    const model = await update.init();
-    render(model);
-  });
-});
