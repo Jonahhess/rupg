@@ -1,4 +1,4 @@
-import init from "./update.js";
+import * as update from "./update.js";
 
 function render(model) {
   const currentUser = model.get("currentUser");
@@ -113,7 +113,7 @@ function render(model) {
 document.addEventListener("DOMContentLoaded", () => {
   const generateUserButton = document.getElementById("generate-user");
   generateUserButton.addEventListener("click", async () => {
-    const model = await init();
+    const model = await update.init();
     render(model);
   });
 });
