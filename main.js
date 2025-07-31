@@ -1,4 +1,4 @@
-import Mock from "./mock.js";
+import Mocker from "./mocker.js";
 import apiKeys from "./apiKeys.js";
 document.addEventListener("DOMContentLoaded", () => {
   console.log("hello world");
@@ -6,10 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const generateUserButton = document.getElementById("generate-user");
   generateUserButton.addEventListener("click", () => {
     console.log("hello world!");
-    const mocker = new Mock();
+    const mocker = new Mocker();
 
     // add api_name: key pairs to mocker
-    mocker.add("random_user_generator");
+    const randomUserGenerator = "random_user_generator";
+    mocker.add("random_user_generator", apiKeys.get(randomUserGenerator));
 
     // API 2:
 
