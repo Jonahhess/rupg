@@ -1,18 +1,14 @@
-async function getData(url, apiKey, textAfterKey = "") {
-  const fullpath = `${url}?api_key=${apiKey}${
-    textAfterKey ? `&${textAfterKey}` : ""
-  }`;
-
-  const cached = localStorage.getItem(fullpath);
+async function getData(url) {
+  const cached = localStorage.getItem(url);
   if (cached) return JSON.parse(cached);
 
-  const response = await fetch(fullpath);
+  const response = await fetch(url);
   if (!response.ok) throw new Error("bad path");
 
   const data = await response.json();
 
   const stringifiedData = JSON.stringify(data);
-  localStorage.setItem(fullpath, stringifiedData);
+  localStorage.setItem(url, stringifiedData);
 
   return data;
 }
