@@ -14,7 +14,7 @@ const parser = () => {
   }
 
   function parsePokemon(pokeInfo) {
-    return { name: pokeInfo.name, img: pokeInfo.sprites.front_default };
+    return { name: pokeInfo.name, sprite: pokeInfo.sprites.front_default };
   }
 
   return { parseUsers, parsePokemon };
