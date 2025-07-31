@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // add api_name: key pairs to mocker
     const randomUserGenerator = "random_user_generator";
-    mocker.add("random_user_generator", apiKeys.get(randomUserGenerator));
+    mocker.add(randomUserGenerator, apiKeys.get(randomUserGenerator));
 
     // API 2:
 
