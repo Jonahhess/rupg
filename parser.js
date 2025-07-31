@@ -6,6 +6,7 @@ const parser = () => {
       lname: first.name.last,
       city: first.location.city,
       state: first.location.state,
+      picture: first.picture,
     };
     return [
       currentUser,
