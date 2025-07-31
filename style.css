@@ -1,0 +1,38 @@
+li {
+  list-style-type: none;
+}
+
+#target {
+  display: flex;
+  width: 1000px;
+}
+
+#current-user-container {
+  background-color: lightblue;
+  display: flex;
+}
+
+#picture-container {
+  align-self: center;
+  margin-right: 10px;
+}
+
+#current-user-details {
+  align-self: center;
+}
+
+#pokemon-container {
+  display: flex;
+}
+
+#favorite-pokemon {
+  align-self: center;
+}
+
+#friends-list-container {
+  min-width: 150px;
+}
+
+#friends-list-title {
+  text-align: center;
+}
