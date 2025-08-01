@@ -3,7 +3,7 @@ Randon User Page Generator
 This project uses MVU architecture. One of the main benefits of this architecture is unidirectional data flow.
 Instead of a Controller being responsible for both the model and view, here we have the following:
 
-View -> Update -> Model -> 
+View -> Update -> Model --> 
 
 View <- Update <- New Model
 
