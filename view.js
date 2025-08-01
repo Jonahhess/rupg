@@ -1,17 +1,31 @@
 import * as update from "./update.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const generateUserButton = document.getElementById("generate-user");
+  const generateUserButton = document.getElementById("generate-user-button");
+
+  const saveUserButton = document.getElementById("save-user-button");
+  saveUserButton.style.display = "none";
+
+  const loadUserButton = document.getElementById("load-user-button");
+  const users = localStorage.getItem("users");
+  if (!users) {
+    loadUserButton.style.display = "none";
+  }
+
   generateUserButton.addEventListener("click", async () => {
     update
       .init()
-      .then((model) => render(model))
+      .then((model) => {
+        render(model);
+        saveUserButton.style.display = "initial";
+      })
       .catch((error) => {
         const errorMessage = document.getElementById("error-message");
         errorMessage.innerHTML = error;
-        footer.appendChild(errorMessage);
       });
   });
+
+  saveUserButton.addEventListener("click", () => update.saveUser());
 });
 
 function render(model) {
