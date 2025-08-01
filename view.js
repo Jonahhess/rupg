@@ -7,10 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   saveUserButton.style.display = "none";
 
   const loadUserButton = document.getElementById("load-user-button");
-  const users = localStorage.getItem("users");
-  if (!users) {
-    loadUserButton.style.display = "none";
-  }
+  loadUserButton.style.display = "none";
 
   generateUserButton.addEventListener("click", async () => {
     update
@@ -18,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((model) => {
         render(model);
         saveUserButton.style.display = "initial";
+        loadUserButton.style.display = "initial";
       })
       .catch((error) => {
         const errorMessage = document.getElementById("error-message");
@@ -29,12 +27,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadUserButton.addEventListener("click", () => {
     const savedUsersList = document.getElementById("saved-users-list");
-    savedUsersList.style.display = "initial";
+
+    // hide list if user clicks away
+    document.addEventListener("mouseup", function (e) {
+      if (savedUsersList && !savedUsersList.contains(e.target)) {
+        savedUsersList.style.display = "none"; // Hide the container.
+      }
+    });
+
     renderSavedUsers();
     const users = document.getElementsByClassName("saved-user");
+    if (users.length) savedUsersList.style.display = "initial";
     Array.from(users).forEach((user) => {
       user.addEventListener("click", () => {
-        render(update.loadUser(user));
+        render(update.loadUser(user.textContent));
+        savedUsersList.style.display = "none";
       });
     });
   });
