@@ -3,8 +3,14 @@ import * as update from "./update.js";
 document.addEventListener("DOMContentLoaded", () => {
   const generateUserButton = document.getElementById("generate-user");
   generateUserButton.addEventListener("click", async () => {
-    const model = await update.init();
-    render(model);
+    update
+      .init()
+      .then((model) => render(model))
+      .catch((error) => {
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.innerHTML = error;
+        footer.appendChild(errorMessage);
+      });
   });
 });
 
