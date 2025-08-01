@@ -66,12 +66,12 @@ export function saveUser(user = model) {
   if (!name || typeof name !== "string") throw new Error("invalid name");
 
   const users = JSON.parse(localStorage.getItem("users") || "[]");
-  if (users.some(([key]) => key === name)) return;
+  if (users.some((user) => name in user)) return;
 
   const userToSave = assignUser(user, {});
   validateShape(userToSave, model);
 
-  users.push({ name: userToSave });
+  users.push({ [name]: userToSave });
   localStorage.setItem("users", JSON.stringify(users));
 }
 
@@ -79,11 +79,11 @@ export function loadUser(name) {
   if (typeof name !== "string") throw new Error("invalid name");
   const users = JSON.parse(localStorage.getItem("users") || "[]");
 
-  for (const [key, user] of users) {
-    if (key === name) {
-      saveUser(model);
-      validateShape(user, model);
-      return assignUser(user, model);
+  for (const user of users) {
+    if (name in user) {
+      saveUser();
+      validateShape(user[name], model);
+      return assignUser(user[name], model);
     }
   }
 }
