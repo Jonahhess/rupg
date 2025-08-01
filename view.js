@@ -26,10 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   saveUserButton.addEventListener("click", () => update.saveUser());
+
   loadUserButton.addEventListener("click", () => {
     renderSavedUsers();
     const users = document.getElementsByClassName("saved-user");
-    users.forEach((user) => {
+    Array.from(users).forEach((user) => {
       user.addEventListener("click", () => {
         render(update.loadUser(user));
       });
@@ -152,7 +153,7 @@ function renderSavedUsers() {
   saveUsersList.innerHTML = "";
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   users.forEach((user) => {
-    if (Object.keys().length !== 1) {
+    if (Object.keys(user).length !== 1) {
       console.error("fatal error: some user saved incorrectly ");
       console.error(`Bad User: ${user}`);
       localStorage.clear();
