@@ -7,8 +7,8 @@ async function getData(url) {
 
   const data = await response.json();
 
-  const stringifiedData = JSON.stringify(data);
-  localStorage.setItem(url, stringifiedData);
+  //const stringifiedData = JSON.stringify(data);
+  //localStorage.setItem(url, stringifiedData);
 
   return data;
 }
