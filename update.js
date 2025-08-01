@@ -86,6 +86,7 @@ export function loadUser(name) {
       return assignUser(user[name], model);
     }
   }
+  throw new Error("No User Found");
 }
 
 export function update(user) {
