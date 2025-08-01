@@ -26,6 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   saveUserButton.addEventListener("click", () => update.saveUser());
+  loadUserButton.addEventListener("click", () => {
+    renderSavedUsers();
+    const users = document.getElementsByClassName("saved-user");
+    users.forEach((user) => {
+      user.addEventListener("click", () => {
+        render(update.loadUser(user));
+      });
+    });
+  });
 });
 
 function render(model) {
@@ -136,4 +145,23 @@ function render(model) {
   target.innerHTML = "";
   target.appendChild(userContainer);
   target.appendChild(friendsListContainer);
+}
+
+function renderSavedUsers() {
+  const saveUsersList = document.getElementById("saved-users-list");
+  saveUsersList.innerHTML = "";
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  users.forEach((user) => {
+    if (Object.keys().length !== 1) {
+      console.error("fatal error: some user saved incorrectly ");
+      console.error(`Bad User: ${user}`);
+      localStorage.clear();
+    }
+
+    const [name] = Object.keys(user);
+    const savedUser = document.createElement("li");
+    savedUser.setAttribute("class", "saved-user");
+    savedUser.innerHTML = name;
+    saveUsersList.appendChild(savedUser);
+  });
 }
