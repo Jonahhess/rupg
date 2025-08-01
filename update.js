@@ -33,14 +33,6 @@ export async function init() {
   return model;
 }
 
-function assignUser(from, to = model) {
-  for (const key in model) {
-    to[key] = from[key];
-  }
-
-  return to;
-}
-
 function validateShape(newObj, oldObj) {
   for (const key in oldObj) {
     const oldValue = oldObj[key];
@@ -52,11 +44,19 @@ function validateShape(newObj, oldObj) {
     // case 2: value is different type than original value
     if (typeof oldValue !== typeof newValue) throw new Error("type mismatch");
 
-    // case 3: value is object - note:
+    // case 3: value is object
     if (typeof newValue === "object") {
       validateShape(newValue, oldValue);
     }
   }
+}
+
+function assignUser(from, to = model) {
+  for (const key in model) {
+    to[key] = from[key];
+  }
+
+  return to;
 }
 
 export function saveUser(user = model) {
@@ -65,22 +65,27 @@ export function saveUser(user = model) {
   const name = user.currentUser?.name;
   if (!name || typeof name !== "string") throw new Error("invalid name");
 
-  const cache = localStorage.getItem(name);
-  if (cache) return;
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  if (users.some(([key]) => key === name)) return;
 
   const userToSave = assignUser(user, {});
   validateShape(userToSave, model);
-  localStorage.setItem(
-    JSON.stringify(userToSave.currentUser.name), // note: names cannot collide
-    JSON.stringify(userToSave)
-  );
+
+  users.push({ name: userToSave });
+  localStorage.setItem("users", JSON.stringify(users));
 }
 
 export function loadUser(name) {
   if (typeof name !== "string") throw new Error("invalid name");
-  const cache = localStorage.getItem(name);
-  if (!cache) throw new Error(`User '${name}' not found`);
-  return JSON.parse(cache);
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+  for (const [key, user] of users) {
+    if (key === name) {
+      saveUser(model);
+      validateShape(user, model);
+      return assignUser(user, model);
+    }
+  }
 }
 
 export function update(user) {
