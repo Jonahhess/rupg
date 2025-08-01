@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
   saveUserButton.addEventListener("click", () => update.saveUser());
 
   loadUserButton.addEventListener("click", () => {
+    const savedUsersList = document.getElementById("saved-users-list");
+    savedUsersList.style.display = "initial";
     renderSavedUsers();
     const users = document.getElementsByClassName("saved-user");
     Array.from(users).forEach((user) => {
