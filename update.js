@@ -81,7 +81,6 @@ export function loadUser(name) {
 
   for (const user of users) {
     if (name in user) {
-      saveUser();
       validateShape(user[name], model);
       return assignUser(user[name], model);
     }
