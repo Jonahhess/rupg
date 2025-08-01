@@ -4,6 +4,7 @@ This project uses MVU architecture. One of the main benefits of this architectur
 Instead of a Controller being responsible for both the model and view, here we have the following:
 
 View -> Update -> Model -> 
+
 View <- Update <- New Model
 
 Dependencies:
